@@ -1,0 +1,26 @@
+#include "apue.h"
+
+Sigfunc *signal(int signo, Sigfunc *func)
+{
+	struct sigaction  act, oact;
+	
+	act.sa_handler = func;
+	act.sa_flags = 0;
+	sigemptyset(&act.sa_mask);
+	
+	if (SIGALRM == signo) {
+#ifdef  SA_INTERRUPT
+	act.sa_flags |= SA_INTERRUPT;
+#endif
+	} else {
+#ifdef	SA_RESTART
+	act.sa_flags |= SA_RESTART;
+#endif
+	}
+	
+	if (sigaction(signo, &act, &oact) < 0)
+		return (SIG_ERR);
+	return (oact.sa_handler);
+}
+
+	

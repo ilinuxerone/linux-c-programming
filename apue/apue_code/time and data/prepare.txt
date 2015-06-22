@@ -1,0 +1,47 @@
+1: 是什么
+2：用在什么情形：一般用来计算时间间隔。
+3：怎么实现
+
+
+#include <time.h>
+
+time_t  time(time *calptr)
+
+return time value on success, -1 on failure
+
+#include <sys/time.h>
+
+int gettimeofday(struct timeval *restrict tp, void *restrict tp)
+
+struct timeval {
+	time_t  tv_sec;
+	long	tc_usec;
+};
+
+return : 0 on success, -1 on error
+
+#include <time.h>
+
+struct tm  *gmtime(time_t *calptr);
+struct tm *localtime(time_t *calptr);
+
+#include <time.h>
+
+time_t  mktime(struct tm *tmptr);
+
+return : calander time on success, -1 on error
+
+#include <time.h>
+char *asctime(constr struct tm *tmptr);
+char *ctime (const time_t *calptr);
+/*asctime和ctime函数产生26字节的字符串， 这与date命令的系统默认输出形式类似*/
+
+#include <time.h>
+
+size_t  strftime(char *restrict buf, size_t maxsize, const char *restrict format, const struct tm *restrict tmptr);
+
+ 返回值：
+如果buf长度足以存放格式化结果及一个null终止符，则该函数返回在buf中存放的字符数，不包括null终止符， 否则该函数返回0.
+
+
+

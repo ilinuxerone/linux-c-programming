@@ -1,0 +1,15 @@
+#Common make definitions, customized for each platform
+
+WKDIR=/mnt/hgfs/H/swap/apue/apue_code/project
+CC=gcc
+COMPILE.c=$(CC) $(CFLAGS) $(CPPFLAGS) -c
+LINK.c=$(CC) $(CFLAGS) $(CPPFLAGS) $(LDDIR) $(LDFLAGS)
+LDDIR=-L../lib
+LDLIBS=../lib/libapue.a $(EXTRALIBS)
+CFLAGS=-ansi -I$(WKDIR)/include -Wall -DBSD $(EXTRA)
+
+# Our library that almost every program needs.
+LIB=../libapue.a
+
+# Common temp files to delete from each directory.
+TEMPFILES=core core.* *.o temp.* *.out typescript*
