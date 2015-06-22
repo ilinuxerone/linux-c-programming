@@ -1,0 +1,24 @@
+# -include  filenames
+
+PROGS = tcpserv01  tcpcli01 tcpcli04 tcpserv02  tcpserv03 tcpserv04
+
+all : $(PROGS)
+
+tcpcli01 :  tcpcli01.o  unp.o
+	gcc -o $@  $^
+tcpcli04 : tcpcli04.o unp.o
+	gcc -o $@  $^
+	
+tcpserv01 : tcpserv01.o  unp.o
+	gcc -o $@  $^
+tcpserv02 : tcpserv02.o  unp.o signal.o sigchldwait.o
+	gcc -o $@  $^
+tcpserv03 : tcpserv03.o  signal.o sigchldwait.o unp.o
+	gcc -o $@  $^
+tcpserv04 : tcpserv04.o signal.o sigchldwaitpid.o unp.o
+	gcc -o $@  $^
+	
+.PHONY : clean
+clean:
+	-rm  $(PROGS) tcpcli01.o tcpserv01.o unp.o signal.o sigchldwait.o  \
+		tcpserv02.o tcpserv03.o tcpserv04.o tcpcli04.o

@@ -1,0 +1,14 @@
+#   include <makefilename>
+#   objects //variables
+
+tcpserv01 : tcpserv01.o  unp.o
+	gcc -o tcpserv01  tcpserv01.o  unp.o
+tcpserv01.o : tcpserv01.c   unp.h
+	gcc -c tcpserv01.c 
+unp.o : unp.c  unp.h
+	gcc -c unp.c 
+.PHONY : clean
+clean :
+	-rm tcpserv01  tcpserv01.o unp.o
+	
+	

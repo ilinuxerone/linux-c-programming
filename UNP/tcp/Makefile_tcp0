@@ -1,0 +1,23 @@
+#   -include <makefilename>
+
+OBJECTS = tcpcli01.o tcpserv01.o unp.o signal.o sigchldwait.o 
+
+tcpserv01 tcpcli01 : $(OBJECTS)
+	gcc -o tcpserv01  tcpserv01.o  unp.o 
+	gcc -o tcpcli01  tcpcli01.o  unp.o 
+tcpserv01.o : tcpserv01.c   unp.h  signal.c sigchldwait.c
+	gcc -c tcpserv01.c signal.c sigchldwait.c
+tcpcli01.o : tcpcli01.c   unp.h
+	gcc -c tcpcli01.c 
+unp.o : unp.c  unp.h
+	gcc -c unp.c 
+signal.o : signal.c unp.h
+	gcc -c signal.c
+sigchldwait.o : sigchldwait.c unp.h
+	gcc -c sigchldwait.c
+	
+.PHONY : clean
+clean :
+	-rm  $(OBJECTS) tcpserv01 tcpcli01
+	
+	

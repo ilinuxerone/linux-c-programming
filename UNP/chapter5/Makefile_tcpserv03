@@ -1,0 +1,12 @@
+# - include 
+
+PROGS = tcpserv03
+
+all : $(PROGS)
+
+tcpserv03 : tcpserv03.o sigchldwait.o  str_echo.o signal.o 
+	gcc -o $@ $^
+.PHONY : clean
+clean :
+	-rm tcpserv03.o sigchldwait.o str_echo.o signal.o tcpserv03
+	

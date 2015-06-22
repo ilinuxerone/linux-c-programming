@@ -1,0 +1,9 @@
+PROGS = tcpcli01
+
+all : $(PROGS)
+
+tcpcli01 : tcpcli01.o  str_cli.o
+	gcc -o $@ $^
+.PHONY : clean
+clean : 
+	-rm tcpcli01.o tcpcli01  str_cli.o

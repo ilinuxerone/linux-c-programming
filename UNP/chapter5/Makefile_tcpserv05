@@ -1,0 +1,7 @@
+PROGS = tcpserv05
+all : $(PROGS)
+tcpserv05 : tcpserv05.o str_echo08.o signal.o sigchldwaitpid.o 
+	gcc -o $@ $^
+.PHONY : clean
+clean :
+	-rm tcpserv05 tcpserv05.o str_echo08.o signal.o sigchldwaitpid.o

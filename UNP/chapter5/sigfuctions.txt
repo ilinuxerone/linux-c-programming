@@ -1,0 +1,25 @@
+sigaction(SIG_ , &act, &oact);
+sigemptyset(&set, sig);
+sigfillset();
+sigaddset();
+sigdelset();
+sigismember();
+
+sigprocmask(how, &set, &oset);
+how :
+SIG_BLOCK SIG_UNBLOCK  SIG_SETMASK
+
+sigpending(&set);
+sigpause(int signo);
+
+
+POSIX Signal Semantics
+We summarize the following points about signal handling on a POSIX-compliant system:
+
+Once a signal handler is installed, it remains installed. (Older systems removed the signal handler each time it was executed.)
+
+While a signal handler is executing, the signal being delivered is blocked. Furthermore, any additional signals that were specified in the sa_mask signal set passed to sigaction when the handler was installed are also blocked. In Figure 5.6, we set sa_mask to the empty set, meaning no additional signals are blocked other than the signal being caught.
+
+If a signal is generated one or more times while it is blocked, it is normally delivered only one time after the signal is unblocked. That is, by default, Unix signals are not queued. We will see an example of this in the next section. The POSIX real-time standard, 1003.1b, defines some reliable signals that are queued, but we do not use them in this text.
+
+It is possible to selectively block and unblock a set of signals using the sigprocmask function. This lets us protect a critical region of code by preventing certain signals from being caught while that region of code is executing.

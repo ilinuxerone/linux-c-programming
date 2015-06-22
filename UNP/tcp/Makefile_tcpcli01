@@ -1,0 +1,14 @@
+#   include <makefilename>
+#   objects //variables
+
+tcpcli01 : tcpcli01.o  unp.o
+	gcc -o tcpcli01  tcpcli01.o  unp.o
+tcpcli01.o : tcpcli01.c   unp.h
+	gcc -c tcpcli01.c 
+unp.o : unp.c  unp.h
+	gcc -c unp.c 
+.PHONY : clean
+clean :
+	-rm tcpcli01  tcpcli01.o unp.o
+	
+	
